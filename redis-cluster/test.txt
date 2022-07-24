@@ -1,0 +1,11 @@
+按如下顺序启动（3主3从）
+start redis-server 6380.conf
+start redis-server 6381.conf
+start redis-server 6382.conf
+start redis-server 6390.conf
+start redis-server 6391.conf
+start redis-server 6392.conf
+
+创建集群，其中6390 6391 6392为replication 节点，在命令行执行：
+redis-cli --cluster create 127.0.0.1:6380 127.0.0.1:6381 127.0.0.1:6382 127.0.0.1:6390 127.0.0.1:6391 127.0.0.1:6392 --cluster-replicas 1
+连接6390并执行set name stay后可以在6391查询到name的值为stay
